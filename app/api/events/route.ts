@@ -6,12 +6,9 @@ export async function POST(request: NextRequest) {
   await connectDB();
   try {
     const body = await request.json();
-    console.log("Received event data:", body);
     let timestamp = body.timestamp;
     if (!timestamp || isNaN(new Date(timestamp).getTime())) {
-      if (isNaN(timestamp.getTime())) {
-        timestamp = new Date();
-      }
+      timestamp = new Date();
     }
 
     const event = new EventModel({
