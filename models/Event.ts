@@ -5,6 +5,7 @@ export interface IEvent extends Document {
   timestamp: Date;
   visitorId: string;
   sessionId: string;
+  country: string;
   properties: Record<string, any>;
   context: {
     userAgent: string;
@@ -20,6 +21,7 @@ const EventSchema = new Schema<IEvent>({
   timestamp: { type: Date, required: true, index: true },
   visitorId: { type: String, required: true, index: true },
   sessionId: { type: String, required: true, index: true },
+  country: { type: String },
   properties: { type: Schema.Types.Mixed },
   context: {
     userAgent: { type: String },
@@ -32,4 +34,4 @@ const EventSchema = new Schema<IEvent>({
 
 export const EventModel = mongoose.models.Event
   ? (mongoose.models.Event as mongoose.Model<IEvent>)
-  : mongoose.model<IEvent>('Event', EventSchema);
+  : mongoose.model<IEvent>("Event", EventSchema);
